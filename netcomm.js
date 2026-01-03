@@ -178,7 +178,8 @@ this.postStringData = function(options, dataString, callbackGood, callbackError)
 		});
 		req.on('error', function(e) {
 			console.log('netcomm.post error: ' + skky.nonNull(e.message) + '.');
-			console.log(e);
+			var errMsg = String(skky.nonNull(e && e.message, '')).replace(/\r|\n/g, '');
+			console.log('netcomm.post error details: ' + errMsg);
 			if (skky.isFunction(callbackError)) {
 				try {
 					callbackError(iot.getBase(), e);
